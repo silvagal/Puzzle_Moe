@@ -1,0 +1,35 @@
+experiment: stage2_moe_symbolic_gating
+seed: 42
+dataset:
+  name: ptbxl
+  path: data/processed/ptbxl/fs500/superclasses
+  batch_size: 64
+  num_workers: 4
+  patch_size: 64
+
+model:
+  patch_encoder_hidden: 128
+  embedding_dim: 256
+  num_experts: 3  # Rhythm, Morphology, Quality
+  num_classes: 5  # NORM, MI, STTC, CD, HYP
+  deep_encoder: true  # Tier B: ResNet-18 Backbone
+  use_attention: true # Tier A: Attention Aggregation
+  attention_heads: 4
+  input_channels: 12 # Tier B: 12-lead input
+
+training:
+  epochs: 50  # Shorter than Stage 1 since we're doing supervised finetuning
+  lr: 0.0003  # Adjusted LR to reduce overfitting
+  weight_decay: 0.002
+  warmup_epochs: 5  # Warm-up for 5 epochs
+  dropout: 0.3
+  grad_clip: 1.0
+  use_symbolic_gating: true
+  lambda_symbolic: 0.7  # Weight for symbolic consistency loss (increased to enforce diversity)
+  lambda_load_balance: 0.01  # Weight for load balancing loss (prevent expert collapse)
+  use_focal_loss: false
+  focal_gamma: 1.5
+
+logging:
+  checkpoint_dir: checkpoints/stage2_moe
+  log_interval: 50

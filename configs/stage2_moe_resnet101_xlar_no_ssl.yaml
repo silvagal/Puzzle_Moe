@@ -1,0 +1,40 @@
+# Stage 2 MoE Fine-tuning - ResNet-101 Backbone (XLarge Experts) - No SSL init
+experiment: stage2_moe_resnet101_xlar_no_ssl
+seed: 42
+
+dataset:
+  name: ptbxl
+  path: data/processed/ptbxl/fs500/superclasses
+  batch_size: 32
+  num_workers: 4
+  patch_size: 64
+
+model:
+  patch_encoder_hidden: 128
+  embedding_dim: 256
+  num_experts: 3
+  num_classes: 5
+  deep_encoder: true
+  encoder_depth: resnet101
+  use_attention: true
+  attention_heads: 4
+  input_channels: 12
+  expert_hidden_dim: 2048
+  expert_type: mlp
+  use_symbolic_gating: true
+
+training:
+  epochs: 50
+  lr: 0.0003
+  weight_decay: 0.003
+  warmup_epochs: 5
+  dropout: 0.35
+  grad_clip: 1.0
+  lambda_symbolic: 0.7
+  lambda_load_balance: 0.01
+  use_focal_loss: false
+  focal_gamma: 1.5
+
+logging:
+  checkpoint_dir: checkpoints/stage2_moe_resnet101_xlar_no_ssl
+  log_interval: 50

@@ -1,0 +1,20 @@
+experiment: ablation_symmetry
+seed: 123
+dataset:
+  name: ecg_puzzle
+  path: data/raw
+  batch_size: 16
+  num_workers: 2
+model:
+  patch_encoder_hidden: 64
+  embedding_dim: 128
+  num_experts: 3
+training:
+  epochs: 3
+  lr: 5e-4
+  weight_decay: 1e-4
+  num_classes: 5
+  lambda_sym_values: [0.0, 0.1, 1.0, 10.0]
+logging:
+  checkpoint_dir: checkpoints/ablation
+  log_interval: 5

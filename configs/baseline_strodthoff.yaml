@@ -1,0 +1,19 @@
+experiment: baseline_strodthoff
+seed: 42
+dataset:
+  name: ptbxl
+  path: /path/to/ptbxl/processed
+  batch_size: 64
+  num_workers: 4
+
+model:
+  name: strodthoff
+  input_channels: 12
+
+training:
+  epochs: 50
+  lr: 0.001
+  weight_decay: 0.0001
+
+logging:
+  log_dir: outputs/
