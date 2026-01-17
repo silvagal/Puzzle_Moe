@@ -189,15 +189,5 @@ What happens:
 - `train_ssl.py`, `train_moe.py`: Main entry points for Stage I and Stage II.
 - `eval_moe_resnet101.py`, `eval_baseline.py`: Evaluation utilities.
 
-## Citation
-```bibtex
-@article{puzzlemoe2025,
-  title={Puzzle-MoE: A Neuro-Symbolic Expert Architecture for Interpretable and Rare-Class-Aware ECG Diagnosis},
-  author={Anonymous Authors},
-  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
-  year={2025}
-}
-```
-
 ## License
 Released for academic research use. See `LICENSE` for details.
